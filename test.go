@@ -1,26 +1,26 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"math/rand"
-	"time"
+	"os"
+	"strings"
 )
 
+// 設定される変数のポインタを取得
+var msg = flag.String("msg", "デフォルト値", "説明")
+var n int
+
+func init() {
+	// ポインタを指定して設定を予約
+	flag.IntVar(&n, "n", 1, "回数")
+}
 func main() {
-	println("hello world!")
-	var str string = "hello world from variable"
-	println(str)
+	// ここで実際に設定される
+	flag.Parse()
+	fmt.Println(strings.Repeat(*msg, n))
 
-	/* for i := 0; i <= 100; i++ {
-		if i%2 == 0 {
-			println(i, "偶数")
-		} else {
-			println(i, "奇数")
-		}
-	} */
+	fmt.Fprintln(os.Stderr, "エラー")   // 標準エラー出力に出力
+	fmt.Fprintln(os.Stderr, "Hello") // 標準出力に出力
 
-	t := time.Now().UnixNano()
-	rand.Seed(t)
-	n := rand.Intn(6)
-	fmt.Println(n)
 }
